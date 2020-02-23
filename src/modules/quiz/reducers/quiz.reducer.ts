@@ -1,16 +1,7 @@
 import { Record, List, Map } from "immutable";
 import actionType from "../constants/quiz.action-type";
 import { IAction } from "../../shared/types/action.interface";
-
-export interface IQuestion {
-  category: string;
-  type: string;
-  difficulty: string;
-  question: string;
-  correct_answer: string;
-  incorrect_answers: string[];
-}
-
+import { IQuestion } from "../types";
 export interface IQuizModel {
   questions: List<IQuestion[]>;
 }

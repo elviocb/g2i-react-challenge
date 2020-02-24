@@ -18,11 +18,11 @@ export const loadAllQuestions = () => async (dispatch: Dispatch) => {
   }
 };
 
-export const loadAllQuestionsSuccess = (data: any) => ({
+const loadAllQuestionsSuccess = (data: any) => ({
   type: actionTypes.LOAD_ALL_QUESTIONS_SUCCESS,
   payload: data,
 });
 
-export const fetchEditSalePaymentsFail = () => ({
+const fetchEditSalePaymentsFail = () => ({
   type: actionTypes.LOAD_ALL_QUESTIONS_FAIL,
 });

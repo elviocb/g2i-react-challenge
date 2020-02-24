@@ -1,4 +1,4 @@
-export interface IQuestion {
+export interface Question {
   category: string;
   type: string;
   difficulty: string;

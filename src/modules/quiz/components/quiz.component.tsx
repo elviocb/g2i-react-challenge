@@ -13,6 +13,8 @@ import { RouteComponentProps } from "react-router";
 import { QUIZ_START_ROUTE, QUIZ_ROUTE, QUIZ_FINISH_ROUTE } from "../constants/quiz.route";
 import { getQuestionNumber } from "../../../utils";
 import { goToNextQuestion, goToPreviousQuestion } from "../actions";
+import { Box } from "../../shared/components/box/box.comp";
+import Typography from "../../shared/components/typography/typography.component";
 
 interface QuizProps extends RouteComponentProps {
   question: Question;
@@ -45,12 +47,34 @@ const Quiz: FC<QuizProps> = ({ question, currentQuestion, currentSection, histor
 
   return (
     <>
-      <div>Quiz Question</div>
-      <div>{q.question}</div>
-      <div>{q.type}</div>
-      <div>{q.difficulty}</div>
-      <div onClick={actions.goToPreviousQuestion}>previous</div>
-      <div onClick={actions.goToNextQuestion}>next</div>
+      <Box flexDirection="column" display="flex" height={"100%"} alignItems="center" marginX={50}>
+        <Box display="flex" flex={1} alignItems="center">
+          <Typography fontSize={[30, 60]} fontWeight={800} color="purple">
+            {q.category}
+          </Typography>
+        </Box>
+        <Box display="flex" flex={1} justifyContent="center" flexDirection="column">
+          <Typography
+            fontSize={[20, 30]}
+            color="white"
+            dangerouslySetInnerHTML={{ __html: q.question }}
+          />
+        </Box>
+        <Box
+          display="flex"
+          flex={1}
+          alignItems="center"
+          onClick={() => actions.goToNextQuestion()}
+          style={{ cursor: "pointer" }}
+        >
+          <Typography fontSize={50} fontWeight={700} color="cyan">
+            True
+          </Typography>
+          <Typography fontSize={50} fontWeight={700} color="cyan">
+            False
+          </Typography>
+        </Box>
+      </Box>
     </>
   );
 };

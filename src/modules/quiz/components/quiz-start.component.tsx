@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { getCurrentSectionSelector, getCurrentQuestionSelector } from "../selectors/quiz.selector";
 import Typography from "../../shared/components/typography/typography.component";
-import ThumbsUpIcon from "../../shared/components/icons/thumbs-up-icon.comp";
 import { Box } from "../../shared/components/box/box.comp";
 
 interface QuizStartProps extends RouteComponentProps {
@@ -26,13 +25,32 @@ const QuizStart: FC<QuizStartProps> = ({ history, actions, currentSection, curre
   }, [currentSection]);
 
   return (
-    <>
-      <Box mb={60}>
-        <Typography>QuizStart Component</Typography>
+    <Box flexDirection="column" display="flex" height={"100%"} alignItems="center" marginX={50}>
+      <Box display="flex" flex={1} alignItems="center">
+        <Typography fontSize={[30, 60]} fontWeight={800} color="purple">
+          Welcome to the Trivia Challenge!
+        </Typography>
       </Box>
-      <ThumbsUpIcon />
-      <div onClick={() => actions.goToNextQuestion()}>start</div>
-    </>
+      <Box display="flex" flex={1} justifyContent="center" flexDirection="column">
+        <Typography fontSize={[20, 30]} color="white" mb={20}>
+          You will be presented with 10 True or False questions.
+        </Typography>
+        <Typography fontSize={[25, 35]} fontWeight={700} color="white">
+          Can you score 100%?
+        </Typography>
+      </Box>
+      <Box
+        display="flex"
+        flex={1}
+        alignItems="center"
+        onClick={() => actions.goToNextQuestion()}
+        style={{ cursor: "pointer" }}
+      >
+        <Typography fontSize={50} fontWeight={700} color="cyan">
+          Begin
+        </Typography>
+      </Box>
+    </Box>
   );
 };
 

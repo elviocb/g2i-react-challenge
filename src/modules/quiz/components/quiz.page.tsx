@@ -22,14 +22,12 @@ const QuizPage: FC<QuizPageProps & RouteComponentProps> = ({ actions }) => {
 
   return (
     <>
-      <BackgroundImage>
-        <Switch>
-          <Route exact={true} path={QUIZ_START_ROUTE} component={QuizStart} />
-          <Route exact={true} path={QUIZ_FINISH_ROUTE} component={QuizFinish} />
-          <Route path={QUIZ_ROUTE} component={Quiz} />
-          <Redirect from={"/"} to={QUIZ_START_ROUTE} />
-        </Switch>
-      </BackgroundImage>
+      <Switch>
+        <Route exact={true} path={QUIZ_START_ROUTE} component={QuizStart} />
+        <Route exact={true} path={QUIZ_FINISH_ROUTE} component={QuizFinish} />
+        <Route path={QUIZ_ROUTE} component={Quiz} />
+        <Redirect from={"/"} to={QUIZ_START_ROUTE} />
+      </Switch>
     </>
   );
 };

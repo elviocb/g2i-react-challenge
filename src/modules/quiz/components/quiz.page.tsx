@@ -2,14 +2,11 @@ import React, { FC, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch, compose } from "redux";
 import { loadAllQuestions } from "../actions";
-import { withRouter, Switch, Route, Redirect } from "react-router";
-import { createStructuredSelector } from "reselect";
+import { withRouter, Switch, Route, Redirect, RouteComponentProps } from "react-router";
 import { QUIZ_START_ROUTE, QUIZ_FINISH_ROUTE, QUIZ_ROUTE } from "../constants/quiz.route";
 import QuizStart from "./quiz-start.component";
 import QuizFinish from "./quiz-finish.component";
 import Quiz from "./quiz.component";
-
-interface QuizPageProps {}
 
 interface QuizPageProps {
   actions: {
@@ -17,7 +14,7 @@ interface QuizPageProps {
   };
 }
 
-const QuizPage: FC<QuizPageProps> = ({ actions }) => {
+const QuizPage: FC<QuizPageProps & RouteComponentProps> = ({ actions }) => {
   useEffect(() => {
     actions.loadAllQuestions();
   }, []);
@@ -32,8 +29,6 @@ const QuizPage: FC<QuizPageProps> = ({ actions }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({});
-
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     actions: bindActionCreators({ loadAllQuestions }, dispatch),
@@ -42,5 +37,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 export default compose<FC<Omit<QuizPageProps, "actions">>>(
   withRouter,
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(null, mapDispatchToProps),
 )(QuizPage);

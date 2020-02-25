@@ -1,6 +1,8 @@
 import { Dispatch } from "redux";
 import actionTypes from "../constants/quiz.action-type";
 import quizProvider from "../../../sdk/lib/quiz/quiz.provider";
+import { IAppState } from "../../../store/reducers";
+import { Record } from "immutable";
 
 export const loadAllQuestions = () => async (dispatch: Dispatch) => {
   dispatch({ type: actionTypes.LOAD_ALL_QUESTIONS });
@@ -10,7 +12,7 @@ export const loadAllQuestions = () => async (dispatch: Dispatch) => {
     difficulty: "hard",
     type: "boolean",
   });
-  console.log("data", data);
+
   if (ok && data) {
     dispatch(loadAllQuestionsSuccess(data.results));
   } else {
@@ -26,3 +28,14 @@ const loadAllQuestionsSuccess = (data: any) => ({
 const fetchEditSalePaymentsFail = () => ({
   type: actionTypes.LOAD_ALL_QUESTIONS_FAIL,
 });
+
+export const goToNextQuestion = () => async (
+  dispatch: Dispatch,
+  getState: () => Record<IAppState>,
+) => {
+  dispatch({ type: actionTypes.GO_TO_NEXT_QUESTION });
+};
+
+export const goToPreviousQuestion = () => async (dispatch: Dispatch) => {
+  dispatch({ type: actionTypes.GO_TO_PREVIOUS_QUESTION });
+};

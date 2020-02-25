@@ -12,11 +12,12 @@ import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { QUIZ_START_ROUTE, QUIZ_ROUTE, QUIZ_FINISH_ROUTE } from "../constants/quiz.route";
 import { getQuestionNumber } from "../../../utils";
-import { goToNextQuestion, goToPreviousQuestion, setQuestionAnwser } from "../actions";
+import { setQuestionAnwser } from "../actions";
 import { Box } from "../../shared/components/box/box.comp";
 import Typography from "../../shared/components/typography/typography.component";
 import ThumbsUpIcon from "../../shared/components/icons/thumbs-up-icon.comp";
 import ThumbsDownIcon from "../../shared/components/icons/thumbs-down-icon.comp";
+import ProgressBar from "./progress-bar.component";
 
 interface QuizProps extends RouteComponentProps {
   question: Question;
@@ -49,6 +50,9 @@ const Quiz: FC<QuizProps> = ({ question, currentQuestion, currentSection, histor
   return (
     <>
       <Box flexDirection="column" display="flex" height={"100%"} alignItems="center" marginX={50}>
+        <Box marginY={20} width={"100%"}>
+          <ProgressBar current={currentQuestion} total={10} />
+        </Box>
         <Box display="flex" flex={1} alignItems="center">
           <Typography fontSize={[30, 60]} fontWeight={800} color="purple">
             {q.category}

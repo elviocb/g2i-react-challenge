@@ -1,6 +1,3 @@
-import React, { FC } from "react";
-import styled from "styled-components";
-
 const colors = {
   lighterBlue: "#8bbef5" as "#8bbef5",
   blue: "#007aff" as "#007aff",
@@ -36,40 +33,13 @@ const colors = {
   white: "#FAFAFA" as "#FAFAFA",
 };
 
-type TypographyTag = "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "span";
+export type ThemeColors = typeof colors;
+export type ThemeColorNames = keyof typeof colors;
 
-const baseFont = `'Montserrat', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'`;
-
-interface TypographyProps {
-  color?: keyof typeof colors;
-  fontSize?: number;
-  fontWeight?: number;
-  lineHeight?: number;
-  tag?: TypographyTag;
+interface ThemeProps {
+  colors: ThemeColors;
 }
 
-const Typography: FC<TypographyProps> = ({
-  tag,
-  fontSize,
-  fontWeight,
-  lineHeight,
-  color,
-  children,
-}) => {
-  const TagComponent = styled(tag || "p")<TypographyProps>`
-    margin: 0;
-    padding: 0;
-
-    ${(props: TypographyProps) =>
-      `font-family: ${baseFont};
-        font-size: ${fontSize || 14}px;
-        font-weight: ${fontWeight || 500};
-        line-height: ${lineHeight || 1.5};
-        color: ${color ? colors[color] : colors.black};
-        `};
-  `;
-
-  return <TagComponent>{children}</TagComponent>;
+export const theme: ThemeProps = {
+  colors,
 };
-
-export default Typography;

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { createStructuredSelector } from "reselect";
 import {
   getQuestionsSelector,
@@ -12,14 +12,23 @@ import { Box } from "../../shared/components/box/box.comp";
 import Typography from "../../shared/components/typography/typography.component";
 import CheckIcon from "../../shared/components/icons/check-icon.comp";
 import CloseIcon from "../../shared/components/icons/close-icon.comp";
+import { RouteComponentProps } from "react-router";
+import { QUIZ_START_ROUTE } from "../constants/quiz.route";
+import { List } from "immutable";
 
-interface QuizFinishProps {
-  questions: Question[];
-  answers: Answer[];
+interface QuizFinishProps extends RouteComponentProps {
+  questions: List<Question>;
+  answers: List<Answer>;
   score: number;
 }
 
-const QuizFinish: FC<QuizFinishProps> = ({ questions, answers, score }) => {
+const QuizFinish: FC<QuizFinishProps> = ({ questions, answers, score, history }) => {
+  useEffect(() => {
+    if (answers.size < 10) {
+      history.replace(`${QUIZ_START_ROUTE}`);
+    }
+  }, [answers.size]);
+
   return (
     <>
       <Box
@@ -36,10 +45,10 @@ const QuizFinish: FC<QuizFinishProps> = ({ questions, answers, score }) => {
         </Box>
         <Box style={{ textAlign: "left" }} marginX={[20, 30]}>
           {answers &&
-            answers.map((a) => {
+            answers.map((a, i) => {
               const Icon = a.isCorrect ? CheckIcon : CloseIcon;
               return (
-                <Box mb={25}>
+                <Box mb={25} key={i}>
                   <Icon color={a.isCorrect ? "green" : "red"} />
                   <Typography
                     fontSize={[16, 20]}

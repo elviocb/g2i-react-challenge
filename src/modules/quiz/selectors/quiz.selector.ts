@@ -12,4 +12,4 @@ const getQuestions = (state: QuizModelState) => state.get("questions");
 export const getQuestionsSelector = () => createSelector(selectQuizDomain, getQuestions);
 
 export const getQuestionSelector = (questionNumber: number) =>
-  createSelector(getQuestionsSelector(), (state) => state.get(questionNumber));
+  createSelector(getQuestionsSelector(), (state) => state.get(questionNumber - 1));

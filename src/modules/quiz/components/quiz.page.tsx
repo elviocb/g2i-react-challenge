@@ -5,9 +5,9 @@ import { loadAllQuestions } from "../actions";
 import { withRouter, Switch, Route, Redirect } from "react-router";
 import { createStructuredSelector } from "reselect";
 import { QUIZ_START_ROUTE, QUIZ_FINISH_ROUTE, QUIZ_ROUTE } from "../constants/quiz.route";
-import { QuizStart } from "./quiz-start.component";
-import { QuizFinish } from "./quiz-finish.component";
-import { Quiz } from "./quiz.component";
+import QuizStart from "./quiz-start.component";
+import QuizFinish from "./quiz-finish.component";
+import Quiz from "./quiz.component";
 
 interface QuizPageProps {}
 

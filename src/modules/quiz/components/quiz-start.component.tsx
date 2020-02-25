@@ -7,4 +7,4 @@ const QuizStart: FC<QuizStartProps> = () => {
   return <div>QuizStart Component</div>;
 };
 
-export { QuizStart };
+export default QuizStart;

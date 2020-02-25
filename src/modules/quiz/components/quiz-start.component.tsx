@@ -5,19 +5,30 @@ import { Dispatch, bindActionCreators, compose } from "redux";
 import { goToNextQuestion } from "../actions";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { getCurrentSectionSelector, getCurrentQuestionSelector } from "../selectors/quiz.selector";
+import {
+  getCurrentSectionSelector,
+  getCurrentQuestionSelector,
+  getLoadingSelector,
+} from "../selectors/quiz.selector";
 import Typography from "../../shared/components/typography/typography.component";
 import { Box } from "../../shared/components/box/box.comp";
 
 interface QuizStartProps extends RouteComponentProps {
   currentSection: "start" | "question" | "finish";
   currentQuestion: number;
+  loading: boolean;
   actions: {
     goToNextQuestion: typeof goToNextQuestion;
   };
 }
 
-const QuizStart: FC<QuizStartProps> = ({ history, actions, currentSection, currentQuestion }) => {
+const QuizStart: FC<QuizStartProps> = ({
+  history,
+  actions,
+  currentSection,
+  currentQuestion,
+  loading,
+}) => {
   useEffect(() => {
     if (currentSection === "question") {
       history.replace(`${QUIZ_ROUTE}/${currentQuestion}`);
@@ -49,11 +60,11 @@ const QuizStart: FC<QuizStartProps> = ({ history, actions, currentSection, curre
         display="flex"
         flex={1}
         alignItems="center"
-        onClick={() => actions.goToNextQuestion()}
+        onClick={() => !loading && actions.goToNextQuestion()}
         style={{ cursor: "pointer" }}
       >
-        <Typography fontSize={50} fontWeight={700} color="cyan">
-          Begin
+        <Typography fontSize={50} fontWeight={700} color={loading ? "darkestGray" : "cyan"}>
+          {loading ? "Loading.." : "Begin"}
         </Typography>
       </Box>
     </Box>
@@ -63,6 +74,7 @@ const QuizStart: FC<QuizStartProps> = ({ history, actions, currentSection, curre
 const mapStateToProps = createStructuredSelector({
   currentSection: getCurrentSectionSelector() as any,
   currentQuestion: getCurrentQuestionSelector() as any,
+  loading: getLoadingSelector() as any,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {

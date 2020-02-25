@@ -6,6 +6,7 @@ import { goToNextQuestion } from "../actions";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { getCurrentSectionSelector, getCurrentQuestionSelector } from "../selectors/quiz.selector";
+import Typography from "../../shared/components/typography.component";
 
 interface QuizStartProps extends RouteComponentProps {
   currentSection: "start" | "question" | "finish";
@@ -24,7 +25,7 @@ const QuizStart: FC<QuizStartProps> = ({ history, actions, currentSection, curre
 
   return (
     <>
-      <div>QuizStart Component</div>
+      <Typography>QuizStart Component</Typography>
       <div onClick={() => actions.goToNextQuestion()}>start</div>
     </>
   );

@@ -7,6 +7,7 @@ import { QUIZ_START_ROUTE, QUIZ_FINISH_ROUTE, QUIZ_ROUTE } from "../constants/qu
 import QuizStart from "./quiz-start.component";
 import QuizFinish from "./quiz-finish.component";
 import Quiz from "./quiz.component";
+import BackgroundImage from "./background.component";
 
 interface QuizPageProps {
   actions: {
@@ -20,12 +21,16 @@ const QuizPage: FC<QuizPageProps & RouteComponentProps> = ({ actions }) => {
   }, []);
 
   return (
-    <Switch>
-      <Route exact={true} path={QUIZ_START_ROUTE} component={QuizStart} />
-      <Route exact={true} path={QUIZ_FINISH_ROUTE} component={QuizFinish} />
-      <Route path={QUIZ_ROUTE} component={Quiz} />
-      <Redirect from={"/"} to={QUIZ_START_ROUTE} />
-    </Switch>
+    <>
+      <BackgroundImage>
+        <Switch>
+          <Route exact={true} path={QUIZ_START_ROUTE} component={QuizStart} />
+          <Route exact={true} path={QUIZ_FINISH_ROUTE} component={QuizFinish} />
+          <Route path={QUIZ_ROUTE} component={Quiz} />
+          <Redirect from={"/"} to={QUIZ_START_ROUTE} />
+        </Switch>
+      </BackgroundImage>
+    </>
   );
 };
 

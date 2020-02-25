@@ -8,6 +8,7 @@ import { createStructuredSelector } from "reselect";
 import { getCurrentSectionSelector, getCurrentQuestionSelector } from "../selectors/quiz.selector";
 import Typography from "../../shared/components/typography/typography.component";
 import ThumbsUpIcon from "../../shared/components/icons/thumbs-up-icon.comp";
+import { Box } from "../../shared/components/box/box.comp";
 
 interface QuizStartProps extends RouteComponentProps {
   currentSection: "start" | "question" | "finish";
@@ -26,7 +27,9 @@ const QuizStart: FC<QuizStartProps> = ({ history, actions, currentSection, curre
 
   return (
     <>
-      <Typography>QuizStart Component</Typography>
+      <Box mb={60}>
+        <Typography>QuizStart Component</Typography>
+      </Box>
       <ThumbsUpIcon />
       <div onClick={() => actions.goToNextQuestion()}>start</div>
     </>

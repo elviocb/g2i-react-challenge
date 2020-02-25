@@ -10,11 +10,9 @@ export type IconProps = {
   style?: any;
 };
 
-const IconHOC = (
-  Icon: React.ComponentType<IconProps>,
-  defaultWidth: number,
-  defaultHeight: number,
-) => (props: IconProps) => {
+const IconHOC = (Icon: React.FC<IconProps>, defaultWidth: number, defaultHeight: number) => (
+  props: IconProps,
+) => {
   const defaultFactor = defaultHeight / defaultWidth;
 
   const { width, height, viewbox, disabled, color } = props;

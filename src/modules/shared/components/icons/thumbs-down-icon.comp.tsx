@@ -1,7 +1,7 @@
-import * as React from "react";
+import React from "react";
 import IconHOC, { IconProps } from "./icon.hoc";
 
-const ThumbsDownIcon: React.FunctionComponent<IconProps> = (props) => {
+const ThumbsDownIcon: React.FC<IconProps> = (props) => {
   const { width, height, viewbox, color } = props;
 
   return (

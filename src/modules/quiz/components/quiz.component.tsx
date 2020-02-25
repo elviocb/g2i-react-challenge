@@ -12,17 +12,18 @@ import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { QUIZ_START_ROUTE, QUIZ_ROUTE, QUIZ_FINISH_ROUTE } from "../constants/quiz.route";
 import { getQuestionNumber } from "../../../utils";
-import { goToNextQuestion, goToPreviousQuestion } from "../actions";
+import { goToNextQuestion, goToPreviousQuestion, setQuestionAnwser } from "../actions";
 import { Box } from "../../shared/components/box/box.comp";
 import Typography from "../../shared/components/typography/typography.component";
+import ThumbsUpIcon from "../../shared/components/icons/thumbs-up-icon.comp";
+import ThumbsDownIcon from "../../shared/components/icons/thumbs-down-icon.comp";
 
 interface QuizProps extends RouteComponentProps {
   question: Question;
   currentQuestion: number;
   currentSection: "start" | "question" | "finish";
   actions: {
-    goToNextQuestion: typeof goToNextQuestion;
-    goToPreviousQuestion: typeof goToPreviousQuestion;
+    setQuestionAnwser: typeof setQuestionAnwser;
   };
 }
 
@@ -60,19 +61,26 @@ const Quiz: FC<QuizProps> = ({ question, currentQuestion, currentSection, histor
             dangerouslySetInnerHTML={{ __html: q.question }}
           />
         </Box>
-        <Box
-          display="flex"
-          flex={1}
-          alignItems="center"
-          onClick={() => actions.goToNextQuestion()}
-          style={{ cursor: "pointer" }}
-        >
-          <Typography fontSize={50} fontWeight={700} color="cyan">
-            True
-          </Typography>
-          <Typography fontSize={50} fontWeight={700} color="cyan">
-            False
-          </Typography>
+        <Box display="flex" flex={1} alignItems="center" style={{ cursor: "pointer" }}>
+          <Box
+            display="flex"
+            flex={1}
+            alignItems="center"
+            onClick={() => actions.setQuestionAnwser("False")}
+            style={{ cursor: "pointer" }}
+            mr={80}
+          >
+            <ThumbsDownIcon color="red" width={100} viewbox="0 0 24 24" />
+          </Box>
+          <Box
+            display="flex"
+            flex={1}
+            alignItems="center"
+            onClick={() => actions.setQuestionAnwser("True")}
+            style={{ cursor: "pointer" }}
+          >
+            <ThumbsUpIcon color="cyan" width={100} viewbox="0 0 24 24" />
+          </Box>
         </Box>
       </Box>
     </>
@@ -96,8 +104,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     actions: bindActionCreators(
       {
-        goToNextQuestion,
-        goToPreviousQuestion,
+        setQuestionAnwser,
       },
       dispatch,
     ),

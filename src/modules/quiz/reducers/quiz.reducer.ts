@@ -1,9 +1,10 @@
 import { Record, List } from "immutable";
 import actionType from "../constants/quiz.action-type";
 import { IAction } from "../../shared/types/action.interface";
-import { Question } from "../types";
+import { Question, Answer } from "../types";
 export interface QuizModel {
-  questions: List<Question[]>;
+  questions: List<Question>;
+  answers: List<Answer>;
   loading: boolean;
   currentQuestion: number;
   currentSection: "start" | "finish" | "question";
@@ -11,6 +12,7 @@ export interface QuizModel {
 
 export const QuizModel = Record<QuizModel>({
   questions: List([]),
+  answers: List([]),
   loading: false,
   currentQuestion: 0,
   currentSection: "start",
@@ -41,6 +43,17 @@ export function quizReducer(state: QuizModelState = new QuizModelState(), action
       } else {
         return state.merge({ currentSection: "start", currentQuestion: 0 });
       }
+    }
+    case actionType.SET_QUESTION_ANSWER: {
+      let currQuestionNumber = state.get("currentQuestion");
+      let question: Question = state.getIn(["questions", currQuestionNumber - 1]);
+      const newAnswer: Answer = {
+        question: question.question,
+        response: action.payload,
+        correctAnswer: question.correct_answer,
+        isCorrect: question.correct_answer === action.payload,
+      };
+      return state.update("answers", (answers) => answers.push(newAnswer));
     }
     default:
       return state;

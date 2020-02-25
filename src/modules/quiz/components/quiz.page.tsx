@@ -7,7 +7,6 @@ import { QUIZ_START_ROUTE, QUIZ_FINISH_ROUTE, QUIZ_ROUTE } from "../constants/qu
 import QuizStart from "./quiz-start.component";
 import QuizFinish from "./quiz-finish.component";
 import Quiz from "./quiz.component";
-import BackgroundImage from "./background.component";
 
 interface QuizPageProps {
   actions: {

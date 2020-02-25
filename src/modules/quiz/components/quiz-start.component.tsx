@@ -25,7 +25,13 @@ const QuizStart: FC<QuizStartProps> = ({ history, actions, currentSection, curre
   }, [currentSection]);
 
   return (
-    <Box flexDirection="column" display="flex" height={"100%"} alignItems="center" marginX={50}>
+    <Box
+      flexDirection="column"
+      display="flex"
+      height={"100%"}
+      alignItems="center"
+      marginX={[20, 30]}
+    >
       <Box display="flex" flex={1} alignItems="center">
         <Typography fontSize={[30, 60]} fontWeight={800} color="purple">
           Welcome to the Trivia Challenge!

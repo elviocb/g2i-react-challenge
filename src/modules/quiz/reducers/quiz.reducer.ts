@@ -8,6 +8,7 @@ export interface QuizModel {
   loading: boolean;
   currentQuestion: number;
   currentSection: "start" | "finish" | "question";
+  score: number;
 }
 
 export const QuizModel = Record<QuizModel>({
@@ -16,6 +17,7 @@ export const QuizModel = Record<QuizModel>({
   loading: false,
   currentQuestion: 0,
   currentSection: "start",
+  score: 0,
 });
 
 export class QuizModelState extends QuizModel {}
@@ -46,6 +48,7 @@ export function quizReducer(state: QuizModelState = new QuizModelState(), action
     }
     case actionType.SET_QUESTION_ANSWER: {
       let currQuestionNumber = state.get("currentQuestion");
+      let currScore = state.get("score");
       let question: Question = state.getIn(["questions", currQuestionNumber - 1]);
       const newAnswer: Answer = {
         question: question.question,
@@ -53,7 +56,8 @@ export function quizReducer(state: QuizModelState = new QuizModelState(), action
         correctAnswer: question.correct_answer,
         isCorrect: question.correct_answer === action.payload,
       };
-      return state.update("answers", (answers) => answers.push(newAnswer));
+      const nextScore = newAnswer.isCorrect ? currScore + 1 : currScore;
+      return state.update("answers", (answers) => answers.push(newAnswer)).set("score", nextScore);
     }
     default:
       return state;

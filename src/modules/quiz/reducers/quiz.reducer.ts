@@ -11,14 +11,16 @@ export interface QuizModel {
   score: number;
 }
 
-export const QuizModel = Record<QuizModel>({
+const initialState: QuizModel = {
   questions: List([]),
   answers: List([]),
   loading: false,
   currentQuestion: 0,
   currentSection: "start",
   score: 0,
-});
+};
+
+export const QuizModel = Record<QuizModel>(initialState);
 
 export class QuizModelState extends QuizModel {}
 
@@ -58,6 +60,9 @@ export function quizReducer(state: QuizModelState = new QuizModelState(), action
       };
       const nextScore = newAnswer.isCorrect ? currScore + 1 : currScore;
       return state.update("answers", (answers) => answers.push(newAnswer)).set("score", nextScore);
+    }
+    case actionType.PLAY_AGAIN: {
+      return state.clear();
     }
     default:
       return state;

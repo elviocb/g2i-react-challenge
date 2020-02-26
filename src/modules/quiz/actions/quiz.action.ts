@@ -37,6 +37,10 @@ export const goToNextQuestion = () => async (
   dispatch({ type: actionTypes.GO_TO_NEXT_QUESTION });
 };
 
+export const playAgain = () => async (dispatch: Dispatch) => {
+  dispatch({ type: actionTypes.PLAY_AGAIN });
+};
+
 export const setQuestionAnwser = (answer: AnswerResponse) => async (
   dispatch: Dispatch,
   getState,

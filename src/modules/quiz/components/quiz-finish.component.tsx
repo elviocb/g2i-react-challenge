@@ -5,7 +5,7 @@ import {
   getAnswersSelector,
   getScoreSelector,
 } from "../selectors/quiz.selector";
-import { compose } from "redux";
+import { compose, Dispatch, bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Question, Answer } from "../types";
 import { Box } from "../../shared/components/box/box.comp";
@@ -15,14 +15,18 @@ import CloseIcon from "../../shared/components/icons/close-icon.comp";
 import { RouteComponentProps } from "react-router";
 import { QUIZ_START_ROUTE } from "../constants/quiz.route";
 import { List } from "immutable";
+import { playAgain } from "../actions";
 
 interface QuizFinishProps extends RouteComponentProps {
   questions: List<Question>;
   answers: List<Answer>;
   score: number;
+  actions: {
+    playAgain: typeof playAgain;
+  };
 }
 
-const QuizFinish: FC<QuizFinishProps> = ({ questions, answers, score, history }) => {
+const QuizFinish: FC<QuizFinishProps> = ({ actions, answers, score, history }) => {
   useEffect(() => {
     if (answers.size < 10) {
       history.replace(`${QUIZ_START_ROUTE}`);
@@ -60,6 +64,18 @@ const QuizFinish: FC<QuizFinishProps> = ({ questions, answers, score, history })
               );
             })}
         </Box>
+        <Box
+          display="flex"
+          flex={1}
+          alignItems="center"
+          onClick={() => actions.playAgain()}
+          style={{ cursor: "pointer" }}
+          marginY={20}
+        >
+          <Typography fontSize={50} fontWeight={700} color={"purple"}>
+            Play again?
+          </Typography>
+        </Box>
       </Box>
     </>
   );
@@ -71,4 +87,12 @@ const mapStateToProps = createStructuredSelector({
   score: getScoreSelector() as any,
 });
 
-export default compose<FC<QuizFinishProps>>(connect(mapStateToProps))(QuizFinish);
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    actions: bindActionCreators({ playAgain }, dispatch),
+  };
+};
+
+export default compose<FC<QuizFinishProps>>(connect(mapStateToProps, mapDispatchToProps))(
+  QuizFinish,
+);

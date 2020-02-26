@@ -4,18 +4,18 @@ import {
   getQuestionsSelector,
   getAnswersSelector,
   getScoreSelector,
-} from "../selectors/quiz.selector";
+} from "../../selectors/quiz.selector";
 import { compose, Dispatch, bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Question, Answer } from "../types";
-import { Box } from "../../shared/components/box/box.comp";
-import Typography from "../../shared/components/typography/typography.component";
-import CheckIcon from "../../shared/components/icons/check-icon.comp";
-import CloseIcon from "../../shared/components/icons/close-icon.comp";
+import { Question, Answer } from "../../types";
+import { Box } from "../../../shared/components/box/box.comp";
+import Typography from "../../../shared/components/typography/typography.component";
+import CheckIcon from "../../../shared/components/icons/check-icon.comp";
+import CloseIcon from "../../../shared/components/icons/close-icon.comp";
 import { RouteComponentProps } from "react-router";
-import { QUIZ_START_ROUTE } from "../constants/quiz.route";
+import { QUIZ_START_ROUTE } from "../../constants/quiz.route";
 import { List } from "immutable";
-import { playAgain } from "../actions";
+import { playAgain } from "../../actions";
 
 interface QuizFinishProps extends RouteComponentProps {
   questions: List<Question>;

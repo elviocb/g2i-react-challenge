@@ -1,25 +1,25 @@
 import React, { FC, useEffect } from "react";
-import { Question } from "../types";
+import { Question } from "../../types";
 import { bindActionCreators, Dispatch, compose } from "redux";
-import { IAppState } from "../../../store/reducers";
+import { IAppState } from "../../../../store/reducers";
 import { Record } from "immutable";
 import {
   getQuestionSelector,
   getCurrentQuestionSelector,
   getCurrentSectionSelector,
-} from "../selectors/quiz.selector";
+} from "../../selectors/quiz.selector";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
-import { QUIZ_START_ROUTE, QUIZ_ROUTE, QUIZ_FINISH_ROUTE } from "../constants/quiz.route";
-import { getQuestionNumber } from "../../../utils";
-import { setQuestionAnwser } from "../actions";
-import { Box } from "../../shared/components/box/box.comp";
-import Typography from "../../shared/components/typography/typography.component";
-import ThumbsUpIcon from "../../shared/components/icons/thumbs-up-icon.comp";
-import ThumbsDownIcon from "../../shared/components/icons/thumbs-down-icon.comp";
-import ProgressBar from "./progress-bar.component";
+import { QUIZ_START_ROUTE, QUIZ_ROUTE, QUIZ_FINISH_ROUTE } from "../../constants/quiz.route";
+import { getQuestionNumber } from "../../../../utils";
+import { setQuestionAnwser } from "../../actions";
+import { Box } from "../../../shared/components/box/box.comp";
+import Typography from "../../../shared/components/typography/typography.component";
+import ThumbsUpIcon from "../../../shared/components/icons/thumbs-up-icon.comp";
+import ThumbsDownIcon from "../../../shared/components/icons/thumbs-down-icon.comp";
+import ProgressBar from "../progress-bar/progress-bar.component";
 
-interface QuizProps extends RouteComponentProps {
+interface QuizQuestionProps extends RouteComponentProps {
   question: Question;
   currentQuestion: number;
   currentSection: "start" | "question" | "finish";
@@ -28,7 +28,13 @@ interface QuizProps extends RouteComponentProps {
   };
 }
 
-const Quiz: FC<QuizProps> = ({ question, currentQuestion, currentSection, history, actions }) => {
+const QuizQuestion: FC<QuizQuestionProps> = ({
+  question,
+  currentQuestion,
+  currentSection,
+  history,
+  actions,
+}) => {
   useEffect(() => {
     if (currentSection === "start" || !question) {
       history.replace(QUIZ_START_ROUTE);
@@ -89,7 +95,7 @@ const Quiz: FC<QuizProps> = ({ question, currentQuestion, currentSection, histor
   );
 };
 
-const mapStateToProps = (state: Record<IAppState>, props: QuizProps) => {
+const mapStateToProps = (state: Record<IAppState>, props: QuizQuestionProps) => {
   const { location } = props;
   const questionNumber = getQuestionNumber(location.pathname);
 
@@ -113,4 +119,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-export default compose<FC<QuizProps>>(connect(mapStateToProps, mapDispatchToProps))(Quiz);
+export default compose<FC<QuizQuestionProps>>(connect(mapStateToProps, mapDispatchToProps))(
+  QuizQuestion,
+);

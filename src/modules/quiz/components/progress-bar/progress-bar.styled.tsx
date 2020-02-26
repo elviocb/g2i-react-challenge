@@ -1,7 +1,6 @@
-import React, { FC } from "react";
 import styled from "styled-components";
 
-const ProgressContainer = styled.div`
+export const ProgressContainer = styled.div`
   width: 100%;
   margin: 0;
   display: flex;
@@ -17,14 +16,14 @@ const ProgressContainer = styled.div`
   }
 `;
 
-const ProgressCounter = styled.div`
+export const ProgressCounter = styled.div`
   position: absolute;
   width: 100%;
   font-weight: bold;
   color: #2a9aa6;
 `;
 
-const ProgressOutter = styled.div`
+export const ProgressOutter = styled.div`
   position: relative;
   align-self: center;
   width: 100%;
@@ -44,7 +43,7 @@ const ProgressOutter = styled.div`
     margin: 20px 0 5px 0;
   }
 `;
-const ProgressInner = styled.div`
+export const ProgressInner = styled.div`
   // width: 10%;
   min-height: 25px;
   white-space: nowrap;
@@ -55,24 +54,3 @@ const ProgressInner = styled.div`
   transition: width 1s ease-in-out;
   animation: "all 1s";
 `;
-
-interface ProgressBarProps {
-  current: number;
-  total: number;
-}
-
-/* eslint-disable react/prefer-stateless-function */
-const ProgressBar: FC<ProgressBarProps> = ({ current, total }) => {
-  return (
-    <ProgressContainer>
-      <ProgressOutter>
-        <ProgressCounter>
-          {current}/{total}
-        </ProgressCounter>
-        <ProgressInner style={{ width: `${10 * current}%` }} />
-      </ProgressOutter>
-    </ProgressContainer>
-  );
-};
-
-export default ProgressBar;

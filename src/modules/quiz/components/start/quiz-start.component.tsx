@@ -1,17 +1,17 @@
 import React, { FC, useEffect } from "react";
 import { RouteComponentProps } from "react-router";
-import { QUIZ_ROUTE } from "../constants/quiz.route";
+import { QUIZ_ROUTE } from "../../constants/quiz.route";
 import { Dispatch, bindActionCreators, compose } from "redux";
-import { goToNextQuestion } from "../actions";
+import { goToNextQuestion } from "../../actions";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import {
   getCurrentSectionSelector,
   getCurrentQuestionSelector,
   getLoadingSelector,
-} from "../selectors/quiz.selector";
-import Typography from "../../shared/components/typography/typography.component";
-import { Box } from "../../shared/components/box/box.comp";
+} from "../../selectors/quiz.selector";
+import Typography from "../../../shared/components/typography/typography.component";
+import { Box } from "../../../shared/components/box/box.comp";
 
 interface QuizStartProps extends RouteComponentProps {
   currentSection: "start" | "question" | "finish";

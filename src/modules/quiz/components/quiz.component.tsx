@@ -48,46 +48,44 @@ const Quiz: FC<QuizProps> = ({ question, currentQuestion, currentSection, histor
   const q = question || {};
 
   return (
-    <>
-      <Box flexDirection="column" display="flex" height={"100%"} alignItems="center" marginX={50}>
-        <Box marginY={20} width={"100%"}>
-          <ProgressBar current={currentQuestion} total={10} />
+    <Box flexDirection="column" display="flex" height={"100%"} alignItems="center" marginX={50}>
+      <Box marginY={20} width={"100%"}>
+        <ProgressBar current={currentQuestion} total={10} />
+      </Box>
+      <Box display="flex" flex={1} alignItems="center">
+        <Typography fontSize={[30, 60]} fontWeight={800} color="purple">
+          {q.category}
+        </Typography>
+      </Box>
+      <Box display="flex" flex={1} justifyContent="center" flexDirection="column">
+        <Typography
+          fontSize={[20, 30]}
+          color="white"
+          dangerouslySetInnerHTML={{ __html: q.question }}
+        />
+      </Box>
+      <Box display="flex" flex={1} alignItems="center" style={{ cursor: "pointer" }}>
+        <Box
+          display="flex"
+          flex={1}
+          alignItems="center"
+          onClick={() => actions.setQuestionAnwser("False")}
+          style={{ cursor: "pointer" }}
+          mr={80}
+        >
+          <ThumbsDownIcon color="red" width={100} viewbox="0 0 24 24" />
         </Box>
-        <Box display="flex" flex={1} alignItems="center">
-          <Typography fontSize={[30, 60]} fontWeight={800} color="purple">
-            {q.category}
-          </Typography>
-        </Box>
-        <Box display="flex" flex={1} justifyContent="center" flexDirection="column">
-          <Typography
-            fontSize={[20, 30]}
-            color="white"
-            dangerouslySetInnerHTML={{ __html: q.question }}
-          />
-        </Box>
-        <Box display="flex" flex={1} alignItems="center" style={{ cursor: "pointer" }}>
-          <Box
-            display="flex"
-            flex={1}
-            alignItems="center"
-            onClick={() => actions.setQuestionAnwser("False")}
-            style={{ cursor: "pointer" }}
-            mr={80}
-          >
-            <ThumbsDownIcon color="red" width={100} viewbox="0 0 24 24" />
-          </Box>
-          <Box
-            display="flex"
-            flex={1}
-            alignItems="center"
-            onClick={() => actions.setQuestionAnwser("True")}
-            style={{ cursor: "pointer" }}
-          >
-            <ThumbsUpIcon color="cyan" width={100} viewbox="0 0 24 24" />
-          </Box>
+        <Box
+          display="flex"
+          flex={1}
+          alignItems="center"
+          onClick={() => actions.setQuestionAnwser("True")}
+          style={{ cursor: "pointer" }}
+        >
+          <ThumbsUpIcon color="cyan" width={100} viewbox="0 0 24 24" />
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 

@@ -34,50 +34,48 @@ const QuizFinish: FC<QuizFinishProps> = ({ actions, answers, score, history }) =
   }, [answers.size]);
 
   return (
-    <>
-      <Box
-        flexDirection="column"
-        display="flex"
-        height={"100%"}
-        alignItems="center"
-        marginX={[20, 30]}
-      >
-        <Box marginY={20} width={"100%"}>
-          <Typography fontSize={[25, 40]} fontWeight={800} color="white">
-            {`You scored ${score} / 10`}
-          </Typography>
-        </Box>
-        <Box style={{ textAlign: "left" }} marginX={[20, 30]}>
-          {answers &&
-            answers.map((a, i) => {
-              const Icon = a.isCorrect ? CheckIcon : CloseIcon;
-              return (
-                <Box mb={25} key={i}>
-                  <Icon color={a.isCorrect ? "green" : "red"} />
-                  <Typography
-                    fontSize={[16, 20]}
-                    fontWeight={800}
-                    color={a.isCorrect ? "green" : "red"}
-                    dangerouslySetInnerHTML={{ __html: a.question }}
-                  />
-                </Box>
-              );
-            })}
-        </Box>
-        <Box
-          display="flex"
-          flex={1}
-          alignItems="center"
-          onClick={() => actions.playAgain()}
-          style={{ cursor: "pointer" }}
-          marginY={20}
-        >
-          <Typography fontSize={50} fontWeight={700} color={"purple"}>
-            Play again?
-          </Typography>
-        </Box>
+    <Box
+      flexDirection="column"
+      display="flex"
+      height={"100%"}
+      alignItems="center"
+      marginX={[20, 30]}
+    >
+      <Box marginY={20} width={"100%"}>
+        <Typography fontSize={[25, 40]} fontWeight={800} color="white">
+          {`You scored ${score} / 10`}
+        </Typography>
       </Box>
-    </>
+      <Box style={{ textAlign: "left" }} marginX={[20, 30]}>
+        {answers &&
+          answers.map((a, i) => {
+            const Icon = a.isCorrect ? CheckIcon : CloseIcon;
+            return (
+              <Box mb={25} key={i}>
+                <Icon color={a.isCorrect ? "green" : "red"} />
+                <Typography
+                  fontSize={[16, 20]}
+                  fontWeight={800}
+                  color={a.isCorrect ? "green" : "red"}
+                  dangerouslySetInnerHTML={{ __html: a.question }}
+                />
+              </Box>
+            );
+          })}
+      </Box>
+      <Box
+        display="flex"
+        flex={1}
+        alignItems="center"
+        onClick={() => actions.playAgain()}
+        style={{ cursor: "pointer" }}
+        marginY={20}
+      >
+        <Typography fontSize={50} fontWeight={700} color={"purple"}>
+          Play again?
+        </Typography>
+      </Box>
+    </Box>
   );
 };
 
